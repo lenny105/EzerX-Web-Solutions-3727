@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { FiVideo, FiCamera, FiMonitor, FiLayout, FiCloud, FiShield } from 'react-icons/fi';
 import ServiceRequest from '../components/ServiceRequest';
+import PaymentForm from '../components/PaymentForm';
+import { useState } from 'react';
 
 const services = [
   {
@@ -36,6 +38,14 @@ const services = [
 ];
 
 const Services = () => {
+  const [showPayment, setShowPayment] = useState(false);
+  const [selectedAmount, setSelectedAmount] = useState(0);
+
+  const handleServiceSubmit = (amount) => {
+    setSelectedAmount(amount);
+    setShowPayment(true);
+  };
+
   return (
     <div className="pt-16">
       {/* Hero Section */}
@@ -82,7 +92,7 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Service Request Section */}
+      {/* Service Request and Payment Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -93,7 +103,20 @@ const Services = () => {
               Tell us about your project and we'll help you bring it to life
             </p>
           </div>
-          <ServiceRequest />
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <ServiceRequest onSubmit={handleServiceSubmit} />
+            </div>
+            {showPayment && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+              >
+                <PaymentForm amount={selectedAmount} />
+              </motion.div>
+            )}
+          </div>
         </div>
       </section>
     </div>

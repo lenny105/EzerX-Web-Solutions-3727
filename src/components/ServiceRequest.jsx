@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiUpload, FiCalendar } from 'react-icons/fi';
 
-const ServiceRequest = () => {
+const ServiceRequest = ({ onSubmit }) => {
   const [selectedService, setSelectedService] = useState('');
   const [estimatedPrice, setEstimatedPrice] = useState(0);
 
@@ -20,10 +20,15 @@ const ServiceRequest = () => {
     setEstimatedPrice(service ? service.basePrice : 0);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(estimatedPrice);
+  };
+
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg">
       <h3 className="text-2xl font-bold mb-6">Request a Service</h3>
-      <form className="space-y-6">
+      <form className="space-y-6" onSubmit={handleSubmit}>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Select Service
@@ -126,7 +131,7 @@ const ServiceRequest = () => {
             type="submit"
             className="bg-secondary hover:bg-secondary-light text-white font-bold py-3 px-8 rounded-full transition-colors duration-200"
           >
-            Submit Request
+            Proceed to Payment
           </button>
         </div>
       </form>

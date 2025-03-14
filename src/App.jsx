@@ -10,7 +10,6 @@ import Contact from './pages/Contact';
 import Careers from './pages/Careers';
 import Team from './pages/Team';
 import News from './pages/News';
-import Partner from './pages/Partner';
 
 function App() {
   return (
@@ -28,7 +27,6 @@ function App() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/team" element={<Team />} />
             <Route path="/news" element={<News />} />
-            <Route path="/partner" element={<Partner />} />
           </Routes>
         </main>
         <Footer />
